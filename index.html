@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Suikogaiden Vol.2 - Traducción al español por Fveralv</title>
+<meta name="description" content="Parche de traducción al español de Gensou Suiko Gaiden Vol.2: Duelo en Crystal Valley (PlayStation, Konami 2001).">
+<meta property="og:title" content="Suikogaiden Vol.2: Duelo en Crystal Valley — Traducción al español">
+<meta property="og:description" content="Parche PPF no oficial: historia, menús, título y tarjetas de episodio en español.">
+<meta property="og:image" content="img/captura1.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Alegreya+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#0a0406; --dusk:#2a0c10; --deep:#3d1216;
+    --gold:#e2c27a; --gold2:#a8833f; --pale:#fff3d1;
+    --crystal:#9fd8ff; --ember:#ff7a3d; --blood:#c0262a;
+    --text:#f6efe6; --text2:#d8c8bf; --muted:#9a8580;
+    --win1:rgba(60,18,24,.86); --win2:rgba(20,6,10,.93); --winline:rgba(226,194,122,.95); --windim:#e2d2c6;
+    --ok:#6fd3a0; --wip:#ffb347; --todo:#a8999a;
+    --title:"Cinzel",Georgia,serif; --sans:"Alegreya Sans",system-ui,"Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{background:var(--night)}
+  body{margin:0;color:var(--text);font-family:var(--sans);font-size:18px;line-height:1.6;min-height:100vh;overflow-x:hidden;
+    background:
+      radial-gradient(ellipse at 50% 105%,rgba(255,122,61,.30) 0%,transparent 50%),
+      radial-gradient(ellipse at 50% -10%,rgba(192,38,42,.22) 0%,transparent 55%),
+      linear-gradient(180deg,#14060a 0%,var(--dusk) 55%,#4a1812 100%) fixed}
+  /* Lineas de barrido, como en una tele de tubo */
+  body::after{content:"";position:fixed;inset:0;z-index:2;pointer-events:none;opacity:.3;
+    background:repeating-linear-gradient(180deg,rgba(0,0,0,.28) 0 1px,transparent 1px 3px)}
+  #sky{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+  main{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:36px 20px 80px}
+  a{color:var(--gold)}
+  h1,h2,h3{margin:0}
+  p{margin:.5em 0}
+  .dim{color:var(--text2)}
+
+  /* ===== Cabecera ===== */
+  header{text-align:center;padding:24px 0 6px}
+  .platform{font-family:var(--title);font-size:13px;font-weight:600;letter-spacing:.35em;color:var(--text2);text-transform:uppercase}
+  .logo{margin:22px auto 0;max-width:760px}
+  .logo img{display:block;width:100%;height:auto;filter:drop-shadow(0 0 2px rgba(255,255,255,.7)) drop-shadow(0 0 22px rgba(255,122,61,.45)) drop-shadow(0 10px 24px rgba(0,0,0,.8))}
+  .subtitle{margin-top:10px;font-family:var(--title);font-weight:600;font-size:22px;letter-spacing:.08em;color:var(--pale);text-shadow:0 0 14px rgba(255,122,61,.5),0 2px 4px #000}
+  .subtitle span{color:var(--gold)}
+  .tagline{display:inline-block;margin-top:22px;padding:6px 22px;border:1px solid rgba(226,194,122,.6);border-radius:3px;
+    font-family:var(--title);font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);background:rgba(226,194,122,.08);
+    box-shadow:0 0 18px rgba(226,194,122,.2),inset 0 0 12px rgba(226,194,122,.12)}
+
+  /* ===== Ventana de dialogo: granate con marco dorado ===== */
+  .box{position:relative;border-radius:6px;padding:22px 24px;color:var(--text);margin:7px;
+    background:linear-gradient(180deg,var(--win1) 0%,var(--win2) 100%);
+    border:2px solid var(--winline);outline:1px solid rgba(168,131,63,.7);outline-offset:-7px;
+    box-shadow:0 0 0 1px rgba(0,0,0,.7),inset 0 1px 18px rgba(255,122,61,.10),0 0 26px rgba(226,194,122,.12),0 18px 40px rgba(0,0,0,.55);
+    text-shadow:1px 1px 0 #0c0204;-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+  .box .dim{color:var(--windim)}
+  .box code{background:rgba(12,2,4,.65);text-shadow:none}
+  .box.more::after{content:"\25BC";position:absolute;right:16px;bottom:8px;font-size:12px;color:var(--gold);animation:bob 1s ease-in-out infinite}
+  @keyframes bob{50%{transform:translateY(4px)}}
+
+  /* Titulos de seccion: rotulo con cristal */
+  h2{display:flex;align-items:center;gap:14px;margin:62px 0 18px;font-family:var(--title);font-size:25px;font-weight:700;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--pale);text-shadow:0 0 14px rgba(255,122,61,.45)}
+  h2::before{content:"";width:14px;height:22px;flex:none;clip-path:polygon(50% 0,100% 35%,50% 100%,0 35%);
+    background:linear-gradient(160deg,#fff 0%,var(--crystal) 40%,#3d7fb8 100%);filter:drop-shadow(0 0 6px rgba(159,216,255,.8))}
+  h2::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,var(--gold),rgba(226,194,122,.3) 40%,transparent)}
+
+  /* Capturas */
+  .shots.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin:38px auto 0}
+  .shot{position:relative;margin:7px;aspect-ratio:4/3;overflow:hidden;border-radius:6px;background:#000;
+    border:2px solid var(--winline);box-shadow:0 0 0 1px rgba(0,0,0,.7),0 0 26px rgba(255,122,61,.16),0 18px 40px rgba(0,0,0,.55)}
+  .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+
+  /* Progreso */
+  .stat .label{font-family:var(--title);font-size:14px;font-weight:600;letter-spacing:.16em;color:var(--windim);text-transform:uppercase}
+  .progress{position:relative;height:22px;border-radius:3px;background:rgba(12,2,4,.7);overflow:hidden;margin:12px 0 6px;border:2px solid var(--winline)}
+  .progress i{display:block;height:100%;width:0;
+    background:linear-gradient(90deg,var(--blood) 0%,var(--ember) 55%,var(--gold) 85%,var(--pale) 100%);
+    box-shadow:0 0 16px rgba(255,122,61,.6);transition:width 1.6s cubic-bezier(.2,.8,.2,1)}
+  .progress::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 14px,rgba(12,2,4,.85) 14px 17px)}
+  .pct{font-family:var(--title);font-size:30px;font-weight:700;color:var(--gold);text-shadow:0 0 12px rgba(226,194,122,.55)}
+  .warn{background:linear-gradient(180deg,rgba(28,40,70,.86) 0%,rgba(8,14,32,.92) 100%);border-color:#c9dcf2}
+  .warn b{color:#dbeaff}
+
+  table{width:100%;border-collapse:collapse}
+  th,td{text-align:left;padding:10px 8px;border-bottom:1px dashed rgba(226,194,122,.3)}
+  th{font-family:var(--title);font-size:14px;letter-spacing:.16em;color:var(--windim);font-weight:600;text-transform:uppercase}
+  tr:last-child td{border-bottom:none}
+  .pill{display:inline-block;padding:1px 12px;border-radius:3px;font-size:14px;font-weight:700;white-space:nowrap;border:2px solid;
+    background:rgba(12,2,4,.6);text-shadow:none}
+  .pill.ok{color:#a8f0c8;border-color:var(--ok)}
+  .pill.wip{color:#ffd48f;border-color:var(--wip)}
+  .pill.todo{color:#e0d6d6;border-color:var(--todo)}
+
+  /* Botones y pasos */
+  .btn{display:inline-flex;align-items:center;gap:10px;padding:12px 24px;border-radius:4px;font-family:var(--title);font-size:17px;font-weight:700;
+    letter-spacing:.06em;text-transform:uppercase;text-decoration:none;text-shadow:none;margin:6px 10px 6px 0;transition:transform .15s,box-shadow .15s,background .15s}
+  .btn.primary{background:linear-gradient(180deg,var(--pale),var(--gold) 45%,var(--gold2));color:#1a1204;border:2px solid #fff7df;box-shadow:0 0 22px rgba(226,194,122,.4)}
+  .btn.primary:hover{box-shadow:0 0 30px rgba(226,194,122,.7)}
+  .btn.secondary{border:2px solid var(--winline);color:var(--text);background:rgba(12,2,4,.6)}
+  .btn.secondary:hover{background:var(--gold);color:#1a1204}
+  .btn:hover{transform:translateY(-2px)}
+  .btn.off{filter:grayscale(.8);opacity:.6;pointer-events:none}
+  .kofi{margin-top:18px;padding-top:14px;border-top:1px dashed rgba(226,194,122,.3)}
+  ol.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+  ol.steps li{counter-increment:s;position:relative;padding:0 0 14px 50px}
+  ol.steps li::before{content:counter(s);position:absolute;left:0;top:-1px;width:32px;height:32px;border-radius:50%;
+    display:grid;place-items:center;font-family:var(--title);font-size:18px;font-weight:700;color:var(--gold);background:rgba(12,2,4,.7);border:2px solid var(--winline)}
+  code{font-family:Consolas,monospace;font-size:.85em;color:var(--pale);background:rgba(255,255,255,.06);padding:1px 6px;border-radius:4px;word-break:break-all}
+  .hash td:first-child{color:var(--windim);white-space:nowrap;font-family:var(--title);font-weight:600;letter-spacing:.08em}
+  ul.notes{margin:.2em 0;padding-left:1.2em}
+  ul.notes li{margin:.45em 0}
+  footer{margin-top:64px;padding-top:18px;border-top:1px solid rgba(226,194,122,.25);font-size:14px;color:var(--muted);text-align:center}
+
+  .js .reveal{opacity:0;transform:translateY(12px);transition:opacity .6s,transform .6s}
+  .js .reveal.in{opacity:1;transform:none}
+  @media (max-width:640px){
+    body{font-size:17px}
+    main{padding:24px 16px 60px}
+    .shots.gallery{grid-template-columns:1fr;gap:10px}
+    .box{padding:18px 16px}
+    h2{font-size:20px;letter-spacing:.1em}
+    .subtitle{font-size:17px}
+    .tagline{letter-spacing:.14em}
+    .hash td{display:block;padding:4px 0}
+    .hash td:first-child{padding-top:10px}
+  }
+  @media (prefers-reduced-motion:reduce){.reveal,.progress i{transition:none}.box.more::after{animation:none}}
+</style>
+</head>
+<body>
+<canvas id="sky" aria-hidden="true"></canvas>
+<main>
+  <header>
+    <div class="platform">PlayStation &middot; Konami &middot; 2001</div>
+    <h1 class="logo"><img src="img/logo.png" alt="Suikogaiden" width="1182" height="153"></h1>
+    <div class="subtitle"><span>Vol.2</span> &middot; Duelo en Crystal Valley</div>
+    <div class="tagline">Traducción al español</div>
+    <p class="dim" style="margin-top:14px">Proyecto de traducción al Español por Fveralv.</p>
+
+    <div class="shots gallery">
+      <figure class="shot"><img src="img/captura1.png" alt="Pantalla de título con el subtítulo «Duelo en Crystal Valley»" onerror="this.parentNode.remove()"></figure>
+      <figure class="shot"><img src="img/captura2.png" alt="Tarjeta «Episodio 2 『Caleria』»" onerror="this.parentNode.remove()"></figure>
+      <figure class="shot"><img src="img/captura3.png" alt="Tarjeta «Episodio 3 『Dragón feroz』»" onerror="this.parentNode.remove()"></figure>
+      <figure class="shot"><img src="img/captura4.png" alt="Tarjeta final «Hasta pronto.» con Nash" onerror="this.parentNode.remove()"></figure>
+    </div>
+  </header>
+
+  <h2 class="reveal">Estado</h2>
+
+  <div class="box warn reveal" style="margin-top:14px">
+    <p><b>&#9888; Versión 1.1.</b> Corrige el cuelgue al empezar una partida nueva de la 1.0 y traduce la ayuda de la galería de imágenes. Toda la historia, los menús, el título, las tarjetas de episodio y la galería están en español. Si encuentras un texto cortado o un fallo, abre una <i>issue</i> con una captura.</p>
+  </div>
+
+  <div class="box reveal" style="margin-top:14px">
+    <div class="stat"><div class="label">Progreso general del proyecto</div></div>
+    <div class="progress" aria-hidden="true"><i id="bar"></i></div>
+    <span class="pct" id="pct">0%</span> <span class="dim">&nbsp;8.078 líneas traducidas; queda probarlo de principio a fin</span>
+  </div>
+
+  <h2 class="reveal">Por secciones</h2>
+  <div class="box reveal">
+    <table>
+      <thead><tr><th>Sección</th><th>Estado</th></tr></thead>
+      <tbody>
+        <tr><td>Historia: los 4 episodios (46 escenas, 8.078 líneas)</td><td><span class="pill ok">Traducido</span></td></tr>
+        <tr><td>Fuente con á é í ó ú ü ñ ¿ ¡ y mayúsculas acentuadas</td><td><span class="pill ok">Hecho</span></td></tr>
+        <tr><td>Menús, guardado, opciones e importación de Suikogaiden Vol.1 y Suikoden I/II</td><td><span class="pill ok">Traducido</span></td></tr>
+        <tr><td>Pantalla de título: «PULSA START», menú y subtítulo</td><td><span class="pill ok">Traducido</span></td></tr>
+        <tr><td>Tarjetas de episodio («Episodio 1 『Orgullo』»...)</td><td><span class="pill ok">Traducido</span></td></tr>
+        <tr><td>Ayuda de la galería de imágenes («SIGUIENTE / ATRÁS / VER CG...»)</td><td><span class="pill ok">Traducido</span></td></tr>
+        <tr><td>Pruebas completas en juego</td><td><span class="pill wip">En curso</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 class="reveal">Descarga</h2>
+  <div class="box reveal">
+    <a class="btn primary off" id="dl" href="#">&#11015; Parche: próximamente</a>
+    <a class="btn secondary" id="repo" href="#">Repositorio</a>
+    <p class="dim">El parche solo contiene las diferencias con el disco. No incluye el juego: necesitas tu propia copia.</p>
+    <div class="kofi">
+      <p class="dim">¿Te gusta lo que hago? Si crees que mi trabajo merece la pena, puedes apoyarme invitándome a un café. ¡Cualquier aporte me ayuda a seguir creando! ☕</p>
+      <script type="text/javascript" src="https://storage.ko-fi.com/cdn/widget/Widget_2.js"></script><script type="text/javascript">kofiwidget2.init('Support me on Ko-fi', '#a8833f', 'S6P527KUBF');kofiwidget2.draw();</script>
+    </div>
+  </div>
+
+  <h2 class="reveal">Cómo aplicarlo</h2>
+  <div class="box reveal">
+    <ol class="steps">
+      <li>Parte de tu imagen de <b>Gensou Suiko Gaiden Vol.2</b> (Japón, SLPM-866.63) <b>con el parche inglés ya aplicado</b>, en formato <code>.bin/.cue</code> (RAW, no <code>.iso</code>).</li>
+      <li>Haz una copia de seguridad del <code>.bin</code>.</li>
+      <li>Aplica <code>Suikogaiden2_ES.v1.1.ppf</code> sobre ese <code>.bin</code> con un aplicador de PPF (PPF-O-Matic o MultiPatch). El aplicador comprueba que el disco es la versión correcta.</li>
+      <li>Si el <code>.bin</code> nuevo tiene otro nombre, edita la línea <code>FILE</code> del <code>.cue</code> para que coincida y carga el <code>.cue</code> en tu emulador.</li>
+    </ol>
+    <p class="dim" style="margin-top:6px">Comprueba antes que tu imagen con el parche inglés es la correcta:</p>
+    <table class="hash">
+      <tr><td>MD5</td><td><code>F3A6A6B2BB8925E1876703D089558280</code></td></tr>
+      <tr><td>SHA-1</td><td><code>221284DBCA176F32E6BC372527F84DEC032B619A</code></td></tr>
+      <tr><td>Resultado</td><td><code>918635EF26817F0767D652749CB493F01AFF5731</code> <span class="dim">(SHA-1 ya traducido)</span></td></tr>
+    </table>
+  </div>
+
+  <h2 class="reveal">Notas</h2>
+  <div class="box more reveal">
+    <ul class="notes">
+      <li>Es la continuación de la <a href="https://fjveralv.github.io/Traduccion_esp_Suikogaiden1/">traducción de Vol.1</a>: mismas herramientas, misma fuente y mismo glosario (sir Nash, Grassland, Crystal Valley, Runa Verdadera, Gremio de la Voz Aullante...).</li>
+      <li>La traducción parte de la versión inglesa de la comunidad. Los nombres de personajes y lugares se mantienen (Nash, Zaj, Lena, Julie, Caleria...).</li>
+      <li>Si importas datos de Suikoden, los nombres de tu protagonista, tu castillo y tu ejército aparecen tal y como los escribiste.</li>
+      <li>Algunas frases van algo reformuladas para caber en el ancho del cuadro de diálogo.</li>
+      <li>Los rótulos gráficos «NOW LOADING» y «MESSAGE SKIP ON/OFF» siguen en inglés.</li>
+      <li>Si encuentras un texto cortado, que se sale del cuadro o un símbolo raro, abre una incidencia en el repositorio indicando dónde estabas y la frase exacta.</li>
+    </ul>
+  </div>
+
+  <footer>
+    Proyecto de traducción fan por Fveralv, basado en el parche inglés de la comunidad.<br>
+    Suikoden y Gensou Suiko Gaiden son marcas de Konami. No se distribuye ninguna copia del juego.
+  </footer>
+</main>
+
+<script>
+(function(){
+  document.documentElement.className += " js";
+  // ===== Editar aqui al avanzar =====
+  var PROGRESS = 99;                         // progreso estimado del proyecto (%)
+  var PATCH = "Suikogaiden2_ES.v1.1.ppf";         // nombre del .ppf publicado en esta carpeta
+  var REPO = "https://github.com/FJVERALV/Traduccion_esp_Suikogaiden2";   // URL del repositorio; vacio = se deduce de la direccion de GitHub Pages
+  // ==================================
+
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Enlaces: en usuario.github.io/repo/ el repositorio es github.com/usuario/repo
+  if(!REPO && /\.github\.io$/i.test(location.hostname)){
+    var user = location.hostname.split(".")[0], seg = location.pathname.split("/").filter(Boolean)[0];
+    REPO = "https://github.com/" + user + "/" + (seg || location.hostname);
+  }
+  var repo = document.getElementById("repo");
+  if(REPO){ repo.href = REPO; }
+  else { repo.style.display = "none"; }
+  if(PATCH){
+    var dl = document.getElementById("dl");
+    dl.href = PATCH; dl.setAttribute("download", ""); dl.classList.remove("off"); dl.innerHTML = "&#11015; Descargar parche";
+  }
+
+  // Aparicion al hacer scroll
+  var els = document.querySelectorAll(".reveal");
+  if("IntersectionObserver" in window && !reduce){
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+    }, {threshold:.1});
+    els.forEach(function(e){ io.observe(e); });
+  } else els.forEach(function(e){ e.classList.add("in"); });
+  setTimeout(function(){ els.forEach(function(e){ e.classList.add("in"); }); }, 2500);
+
+  // Barra de progreso
+  var bar = document.getElementById("bar"), pct = document.getElementById("pct");
+  setTimeout(function(){
+    bar.style.width = PROGRESS + "%";
+    if(reduce){ pct.textContent = PROGRESS + "%"; return; }
+    var v = 0, t = setInterval(function(){ v++; pct.textContent = v + "%"; if(v >= PROGRESS) clearInterval(t); }, 18);
+  }, reduce ? 0 : 700);
+
+  // Fondo: atardecer sobre Crystal Valley, montañas recortadas, cristales en las laderas y chispas que suben
+  var c = document.getElementById("sky"), x = c.getContext("2d"), bg = document.createElement("canvas"), motes = [], W, H, base;
+  function ridge(s, y, amp, step, col){
+    s.fillStyle = col; s.beginPath(); s.moveTo(0, H);
+    var py = y;
+    for(var px = 0; px <= W + step; px += step){
+      py = Math.max(y - amp, Math.min(y + amp * .3, py + (Math.random() - .5) * amp * .5));
+      s.lineTo(px, py);
+    }
+    s.lineTo(W, H); s.fill();
+  }
+  function scene(){
+    bg.width = W; bg.height = H;
+    var s = bg.getContext("2d"); base = H * .82;
+    for(var i = 0; i < 90; i++){ // estrellas en lo alto, donde ya es de noche
+      s.fillStyle = "rgba(255,236,220," + (Math.random() * .5 + .1) + ")";
+      s.fillRect(Math.random() * W, Math.random() * H * .35, 1, 1);
+    }
+    var sun = s.createRadialGradient(W * .5, base - 20, 0, W * .5, base - 20, Math.max(W, H) * .45); // resplandor del sol
+    sun.addColorStop(0, "rgba(255,214,150,.55)"); sun.addColorStop(.2, "rgba(255,122,61,.25)"); sun.addColorStop(1, "rgba(255,122,61,0)");
+    s.fillStyle = sun; s.fillRect(0, 0, W, H);
+    ridge(s, base - 70, 70, 26, "#3a1014");   // cordillera lejana
+    ridge(s, base - 25, 40, 18, "#1c070a");   // colinas
+    // cristales en la ladera
+    for(var k = 0; k < Math.floor(W / 120); k++){
+      var cx = Math.random() * W, cy = base - 10 - Math.random() * 30, ch = 14 + Math.random() * 26, cw = ch * .35;
+      var g = s.createLinearGradient(cx, cy - ch, cx, cy);
+      g.addColorStop(0, "rgba(220,240,255,.75)"); g.addColorStop(1, "rgba(80,140,200,.15)");
+      s.fillStyle = g; s.beginPath(); s.moveTo(cx, cy - ch); s.lineTo(cx + cw, cy - ch * .3); s.lineTo(cx, cy); s.lineTo(cx - cw, cy - ch * .3); s.fill();
+    }
+    s.fillStyle = "#0a0305"; s.fillRect(0, base, W, H - base); // valle en sombra
+    ridge(s, base + 4, 10, 10, "#0a0305");
+  }
+  function spawn(p, initial){
+    p.x = Math.random() * W;
+    p.y = initial ? Math.random() * H : H + 10;
+    p.v = .2 + Math.random() * .6;
+    p.r = .8 + Math.random() * 1.8;
+    p.ph = Math.random() * 6.3;
+    p.col = Math.random() < .65 ? "255,150,80" : "159,216,255";
+    return p;
+  }
+  function size(){
+    W = c.width = innerWidth; H = c.height = innerHeight; scene(); motes = [];
+    var n = Math.min(60, Math.floor(W / 22));
+    for(var i = 0; i < n; i++) motes.push(spawn({}, true));
+  }
+  size(); addEventListener("resize", size);
+  var tick = 0;
+  function draw(){
+    tick++;
+    x.clearRect(0, 0, W, H);
+    if(W && H){ x.globalAlpha = .8; x.drawImage(bg, 0, 0); x.globalAlpha = 1; }
+    for(var i = 0; i < motes.length; i++){
+      var p = motes[i];
+      if(!reduce){ p.y -= p.v; p.x += Math.sin(tick / 60 + p.ph) * .3; if(p.y < -10) spawn(p, false); }
+      var a = .35 + .35 * Math.sin(tick / 25 + p.ph);
+      var g = x.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4);
+      g.addColorStop(0, "rgba(" + p.col + "," + a + ")"); g.addColorStop(1, "rgba(" + p.col + ",0)");
+      x.fillStyle = g; x.beginPath(); x.arc(p.x, p.y, p.r * 4, 0, 7); x.fill();
+    }
+    if(!reduce) requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
